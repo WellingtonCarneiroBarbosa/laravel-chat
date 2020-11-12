@@ -8,10 +8,10 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg flex overflow-y-scroll" style="min-height: 400px; max-height: 400px;">
+            <div class="bg-white shadow-xl sm:rounded-lg flex" style="min-height: 400px; max-height: 400px;">
 
                 <!-- List Users -->
-                <div class="w-3/12 bg-gray-200 bg-opacity-25 border-r border-gray-200">
+                <div class="w-3/12 bg-gray-200 bg-opacity-25 border-r border-gray-200 overflow-y-scroll">
                     <ul>
                         <li class="p-6 text-large text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
                             <p class="flex items-center">
@@ -96,10 +96,12 @@ export default {
 
 <style>
 .messageFromMe {
-    @apply bg-indigo-300 bg-opacity-25;
+    @apply bg-indigo-300;
+    @apply bg-opacity-25;
 }
 
 .messageToMe {
-    @apply bg-gray-200 bg-opacity-25;
+    @apply bg-gray-200;
+    @apply bg-opacity-25;
 }
 </style>
