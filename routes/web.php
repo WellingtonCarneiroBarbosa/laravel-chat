@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified'], 'prefix' => 'dashboa
 // API Routes
 // * TEMPORARY BECAUSE THE AUTH DOES NOT WORKING IN api.php
 Route::group(['prefix' => 'api', 'middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::get("/users/{user}", [UserController::class, 'show']);
     Route::get("/users/except-logged-in", [UserController::class, 'getAllUsersExceptLoggedIn']);
     Route::get("/messages/{user}", [MessageController::class, 'index']);
 });

@@ -13,7 +13,7 @@
                 <!-- List Users -->
                 <div class="w-3/12 bg-gray-200 bg-opacity-25 border-r border-gray-200 overflow-y-scroll">
                     <ul>
-                        <li v-for="user in users" :key="user.id" @click="() => {getMessages(user.id)}" class="p-6 text-large text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
+                        <li :class="(userSelected && userSelected.id == user.id)  ? 'bg-gray-200 bg-opacity-50' : ''" v-for="user in users" :key="user.id" @click="() => {getMessages(user.id)}" class="p-6 text-large text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
                             <p class="flex items-center">
                                 {{ user.name }}
                                 <span class="ml-2 h-2 w-2 bg-blue-500 rounded-full"></span>
@@ -71,13 +71,18 @@ export default {
     data() {
         return {
             users: [],
-            messages: []
+            messages: [],
+            userSelected: null
         }
     },
 
     methods: {
-        getMessages: function (userId) {
-            axios.get(`/api/messages/${userId}`).then(response => {
+        getMessages: async function (userId) {
+            axios.get('/api/users/' + userId).then(response => {
+                this.userSelected = response.data.user;
+            });
+
+            await axios.get(`/api/messages/${userId}`).then(response => {
                 this.messages = response.data.messages
             });
         },

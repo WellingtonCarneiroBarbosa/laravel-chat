@@ -16,7 +16,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getAllUsersExceptLoggedIn() {
+    public function getAllUsersExceptLoggedIn()
+    {
         try {
             $users = User::where("id", "!=", Auth::user()->id)->orderBy("name", "ASC")->get();
             //$users = User::all();
@@ -27,6 +28,18 @@ class UserController extends Controller
         } catch(\Exception $e) {
             if(config('app.debug'))
                 return response()->json(["message" => $e->getMessage()],Response::HTTP_INTERNAL_SERVER_ERROR);
+
+            return response()->json(["message" => "Something went wrong!"], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function show(User $user)
+    {
+        try {
+            return response()->json(["user" => $user], Response::HTTP_OK);
+        } catch(\Exception $e) {
+            if(config('app.debug'))
+                return response()->json(["message" => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
 
             return response()->json(["message" => "Something went wrong!"], Response::HTTP_INTERNAL_SERVER_ERROR);
         }

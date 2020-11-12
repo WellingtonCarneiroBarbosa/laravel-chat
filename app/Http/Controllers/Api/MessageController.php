@@ -19,7 +19,8 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user) {
+    public function index(User $user)
+    {
         try {
             $userId = $user->id;
             $userIdLoggedIn = Auth::user()->id;
