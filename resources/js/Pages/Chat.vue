@@ -38,7 +38,7 @@
                             <p :class="(message.from == $page.auth.user.id) ? 'messageFromMe' : 'messageToMe'" class="inline-block p-2 rounded-md" style="max-width: 75%;">
                                 {{ message.content }}
                             </p>
-                            <span class="block mt-1 text-xs text-gray-500">{{ message.created_at }}</span>
+                            <span class="block mt-1 text-xs text-gray-500">{{ message.created_at | formatDate}}</span>
                         </div>
 
                     </div>

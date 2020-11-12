@@ -5,6 +5,16 @@ import Vue from 'vue';
 import { InertiaApp } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
+import moment from 'moment/moment';
+
+
+moment.locale('pt-br');
+
+Vue.filter('formatDate', function (value) {
+    if(value) {
+        return moment(value).calendar();
+    }
+});
 
 Vue.mixin({ methods: { route } });
 Vue.use(InertiaApp);
