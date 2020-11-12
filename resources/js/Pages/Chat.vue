@@ -13,7 +13,7 @@
                 <!-- List Users -->
                 <div class="w-3/12 bg-gray-200 bg-opacity-25 border-r border-gray-200 overflow-y-scroll">
                     <ul>
-                        <li v-for="user in users" :key="user.id" class="p-6 text-large text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
+                        <li v-for="user in users" :key="user.id" @click="() => {getMessages(user.id)}" class="p-6 text-large text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
                             <p class="flex items-center">
                                 {{ user.name }}
                                 <span class="ml-2 h-2 w-2 bg-blue-500 rounded-full"></span>
@@ -29,27 +29,20 @@
                     <div class="w-full p-6 flex flex-col overflow-y-scroll">
 
                         <!-- Single Message -->
-                        <div class="w-full mb-3 text-right">
+                        <div v-for="message in messages" :key="message.id" class="w-full mb-3 text-right">
                             <p class="inline-block p-2 rounded-md messageFromMe" style="max-width: 75%;">
-                                Olá!
+                                {{ message.content }}
                             </p>
                             <span class="block mt-1 text-xs text-gray-500">Hoje 12:21</span>
                         </div>
 
-                        <!-- Single Message -->
+                        <!-- Single Message
                         <div class="w-full mb-3">
                             <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%;">
                                 Oie
                             </p>
                         </div>
-
-                        <!-- Single Message -->
-                        <div class="w-full mb-3">
-                            <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%;">
-                                Tudo bem contigo?
-                            </p>
-                            <span class="block mt-1 text-xs text-gray-500">Hoje 12:21</span>
-                        </div>
+                        -->
 
                     </div>
 
@@ -81,7 +74,16 @@ export default {
     data() {
         return {
             users: [],
+            messages: []
         }
+    },
+
+    methods: {
+        getMessages: function (userId) {
+            axios.get(`/api/messages/${userId}`).then(response => {
+                this.messages = response.data.messages
+            });
+        },
     },
 
     mounted() {

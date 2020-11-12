@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Web\PageController;
+use App\Http\Controllers\Api\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,5 @@ Route::group(['middleware' => ['auth:sanctum', 'verified'], 'prefix' => 'dashboa
 // * TEMPORARY BECAUSE THE AUTH DOES NOT WORKING IN api.php
 Route::group(['prefix' => 'api', 'middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get("/users/except-logged-in", [UserController::class, 'getAllUsersExceptLoggedIn']);
+    Route::get("/messages/{user}", [MessageController::class, 'index']);
 });
