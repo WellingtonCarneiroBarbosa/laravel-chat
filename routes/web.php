@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Web\PageController;
 
 /*
@@ -22,5 +24,15 @@ Route::get('/', [PageController::class, 'welcome'])->name('welcome');
 Route::group(['middleware' => ['auth:sanctum', 'verified'], 'prefix' => 'dashboard'], function () {
     Route::get("/", [PageController::class, 'dashboard'])->name('dashboard');
 
+    Route::get("/me", function (Request $request) {
+        dd($request->user());
+    });
+
     Route::get("/chat", [PageController::class, 'chat'])->name('chat');
+});
+
+// API Routes
+// * TEMPORARY BECAUSE THE AUTH DOES NOT WORKING IN api.php
+Route::group(['prefix' => 'api', 'middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::get("/users/except-logged-in", [UserController::class, 'getAllUsersExceptLoggedIn']);
 });
