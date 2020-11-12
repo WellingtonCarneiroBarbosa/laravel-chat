@@ -33,16 +33,15 @@
                             <p class="inline-block p-2 rounded-md messageFromMe" style="max-width: 75%;">
                                 {{ message.content }}
                             </p>
-                            <span class="block mt-1 text-xs text-gray-500">Hoje 12:21</span>
+                            <span class="block mt-1 text-xs text-gray-500">{{ message.created_at }}</span>
                         </div>
 
-                        <!-- Single Message
+                        <!-- Single Message -->
                         <div class="w-full mb-3">
                             <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%;">
                                 Oie
                             </p>
                         </div>
-                        -->
 
                     </div>
 
