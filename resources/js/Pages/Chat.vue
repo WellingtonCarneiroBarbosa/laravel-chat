@@ -29,18 +29,16 @@
                     <div class="w-full p-6 flex flex-col overflow-y-scroll">
 
                         <!-- Single Message -->
-                        <div v-for="message in messages" :key="message.id" class="w-full mb-3 text-right">
-                            <p class="inline-block p-2 rounded-md messageFromMe" style="max-width: 75%;">
+
+                        <!--
+                            If message is from auth user, it will display on right and blue
+                            else, it will display on left and gray
+                            -->
+                        <div v-for="message in messages" :key="message.id" :class="(message.from == $page.auth.user.id) ? 'text-right' : '' " class="w-full mb-3">
+                            <p :class="(message.from == $page.auth.user.id) ? 'messageFromMe' : 'messageToMe'" class="inline-block p-2 rounded-md" style="max-width: 75%;">
                                 {{ message.content }}
                             </p>
                             <span class="block mt-1 text-xs text-gray-500">{{ message.created_at }}</span>
-                        </div>
-
-                        <!-- Single Message -->
-                        <div class="w-full mb-3">
-                            <p class="inline-block p-2 rounded-md messageToMe" style="max-width: 75%;">
-                                Oie
-                            </p>
                         </div>
 
                     </div>
