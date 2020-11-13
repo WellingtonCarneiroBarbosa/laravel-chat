@@ -45,9 +45,9 @@
 
                     <!-- Submit message form -->
                     <div v-if="userSelected" class="w-full bg-gray-200 bg-opacity-25 p-6 border-t border-gray-200">
-                        <form>
+                        <form v-on:submit.prevent="">
                             <div class="flex rounded-md overflow-hidden border border-gray-300">
-                                <input class="flex-1 px-4 py-2 text-sm focus:outline-none" type="text">
+                                <input v-model="message" class="flex-1 px-4 py-2 text-sm focus:outline-none" type="text">
                                 <button class="bg-indigo-500 rounded-sm hover:bg-indigo-600 text-white px-4 py-2" type="submit">Enviar</button>
                             </div>
                         </form>
@@ -72,7 +72,8 @@ export default {
         return {
             users: [],
             messages: [],
-            userSelected: null
+            userSelected: null,
+            message: "",
         }
     },
 
@@ -85,6 +86,10 @@ export default {
             await axios.get(`/api/messages/${userId}`).then(response => {
                 this.messages = response.data.messages
             });
+        },
+
+        sendMessage: function () {
+
         },
     },
 
