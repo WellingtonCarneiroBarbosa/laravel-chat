@@ -76,7 +76,7 @@ php artisan websocket:serve
 
 ## Autor
 <a href="https://github.com/wellingtoncarneirobarbosa" target="_blank">
-<img src="./public/readme-assets/autor.jpg" width="48" height="48" alt="Wellington Carneiro Barbosa"> Wellington Barbosa
+<img src="./public/readme-assets/autor.jpg" width="80" height="80" alt="Wellington Carneiro Barbosa"> Wellington Barbosa
 </a>
 <br>
 <a href="https://instagram.com/owellcarneiro" target="_blank">
