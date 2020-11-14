@@ -16,7 +16,7 @@
                         <li v-on:click="setUserActive(user.id)" :class="(userSelectedId && userSelectedId == user.id)  ? 'bg-gray-200 bg-opacity-50' : ''" v-for="user in users" :key="user.id" @click="() => {getMessages(user.id)}" class="p-6 text-large text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
                             <p class="flex items-center">
                                 {{ user.name }}
-                                <span class="ml-2 h-2 w-2 bg-blue-500 rounded-full"></span>
+                                <span v-if="user.notification" span class="ml-2 h-2 w-2 bg-blue-500 rounded-full"></span>
                             </p>
                         </li>
                     </ul>
@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import AppLayout from '@/Layouts/AppLayout'
 import Store from '../store';
 
@@ -99,6 +100,16 @@ export default {
             //clear the message box
             this.messages = [];
 
+            const user = this.users.filter((user) => {
+                if(user.id == userId) {
+                    return user;
+                }
+            });
+
+            if(user) {
+                Vue.set(user[0], 'notification', false);
+            }
+
             await axios.get(`/api/messages/${userId}`).then(response => {
                 this.messages = response.data.messages
             });
@@ -132,6 +143,26 @@ export default {
     mounted() {
         axios.get("/api/users/except-logged-in").then(response => {
             this.users = response.data.users
+        });
+
+        //Private Channel of this user
+        Echo.private('user.' + this.user.id).listen(".SendMessage", async (event) => {
+
+            if(this.userSelectedId && this.userSelectedId == event.content.from) {
+                await this.messages.push(event.content);
+                this.scrollToMessageBoxBottom();
+            } else {
+                const user = this.users.filter((user) => {
+                    if(user.id == event.content.from) {
+                        return user;
+                    }
+                });
+
+                if(user) {
+                    Vue.set(user[0], 'notification', true);
+                }
+            }
+
         });
     }
 }

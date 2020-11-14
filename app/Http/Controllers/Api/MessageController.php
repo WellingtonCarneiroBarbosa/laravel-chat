@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\Chat\SendMessage;
 use App\Models\User;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use Symfony\Component\HttpFoundation\Response;
 
 class MessageController extends Controller
@@ -73,6 +75,9 @@ class MessageController extends Controller
                 "to" => $validatedData["to"],
                 "content" => $validatedData["content"]
             ]);
+
+            //dispatch event to user
+            Event::dispatch(new SendMessage($message, (int) $validatedData["to"]));
 
             return response()->json(['message' => $message], Response::HTTP_CREATED);
         } catch(\Exception $e) {
