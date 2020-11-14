@@ -66,6 +66,7 @@ class MessageController extends Controller
                 'content' => 'required',
                 'to' => 'required',
             ]);
+            $validatedData["content"] = filter_var($validatedData['content'], FILTER_SANITIZE_STRIPPED);
 
             $message = Message::create([
                 "from" => $request->user()->id,
