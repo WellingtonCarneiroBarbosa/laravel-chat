@@ -13,7 +13,7 @@
                 <!-- List Users -->
                 <div class="w-3/12 bg-gray-200 bg-opacity-25 border-r border-gray-200 overflow-y-scroll">
                     <ul>
-                        <li :class="(userSelected && userSelected.id == user.id)  ? 'bg-gray-200 bg-opacity-50' : ''" v-for="user in users" :key="user.id" @click="() => {getMessages(user.id)}" class="p-6 text-large text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
+                        <li v-on:click="setUserActive(user.id)" :class="(userSelectedId && userSelectedId == user.id)  ? 'bg-gray-200 bg-opacity-50' : ''" v-for="user in users" :key="user.id" @click="() => {getMessages(user.id)}" class="p-6 text-large text-gray-600 leading-7 font-semibold border-b border-gray-200 hover:bg-gray-200 hover:bg-opacity-50 hover:cursor-pointer">
                             <p class="flex items-center">
                                 {{ user.name }}
                                 <span class="ml-2 h-2 w-2 bg-blue-500 rounded-full"></span>
@@ -34,7 +34,7 @@
                             If message is from auth user, it will display on right and blue
                             else, it will display on left and gray
                             -->
-                        <div v-for="message in messages" :key="message.id" :class="(message.from == $page.auth.user.id) ? 'text-right' : '' " class="w-full mb-3">
+                        <div v-for="message in messages" :key="message.id" :class="(message.from == $page.auth.user.id) ? 'text-right' : '' " class="w-full mb-3 single-message">
                             <p :class="(message.from == $page.auth.user.id) ? 'messageFromMe' : 'messageToMe'" class="inline-block p-2 rounded-md" style="max-width: 75%;">
                                 {{ message.content }}
                             </p>
@@ -44,7 +44,7 @@
                     </div>
 
                     <!-- Submit message form -->
-                    <div v-if="userSelected" class="w-full bg-gray-200 bg-opacity-25 p-6 border-t border-gray-200">
+                    <div v-if="userSelectedId" class="w-full bg-gray-200 bg-opacity-25 p-6 border-t border-gray-200">
                         <form v-on:submit.prevent="sendMessage">
                             <div class="flex rounded-md overflow-hidden border border-gray-300">
                                 <input v-model="message" class="flex-1 px-4 py-2 text-sm focus:outline-none" type="text">
@@ -72,34 +72,52 @@ export default {
         return {
             users: [],
             messages: [],
-            userSelected: null,
+            userSelectedId: null,
             message: "",
         }
     },
 
     methods: {
+        setUserActive(userId) {
+            this.userSelectedId = userId;
+        },
+
+        scrollToMessageBoxBottom: function () {
+            if(this.messages.length){
+                document.querySelectorAll(".single-message:last-child")[0].scrollIntoView();
+            }
+        },
+
         getMessages: async function (userId) {
-            axios.get('/api/users/' + userId).then(response => {
-                this.userSelected = response.data.user;
-            });
+            //clear the message box
+            this.messages = [];
 
             await axios.get(`/api/messages/${userId}`).then(response => {
                 this.messages = response.data.messages
             });
+
+            this.scrollToMessageBoxBottom();
         },
 
-        sendMessage: function () {
+        sendMessage: async function () {
             if(this.message != "" || this.message.length > 0) {
-                this.messages.push(this.message);
+                await this.messages.push({
+                    'from': 1,
+                    'to': this.userSelectedId,
+                    'content': this.message,
+                    'created_at': new Date().toISOString(),
+                    'updated_at': new Date().toISOString(),
+                });
+
+                this.scrollToMessageBoxBottom();
+
                 let message = this.message;
                 this.message = "";
 
-                let data = {
-                    "to": this.userSelected.id,
+                axios.post("/api/messages/", {
+                    "to": this.userSelectedId,
                     "content": message
-                };
-
-                axios.post("/api/messages/", data).then(response => {
+                }).then(() => {
                     console.log("message sent!");
                 });
             }
