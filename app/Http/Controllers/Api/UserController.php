@@ -44,4 +44,16 @@ class UserController extends Controller
             return response()->json(["message" => "Something went wrong!"], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    public function me(Request $request)
+    {
+        try {
+            return response()->json(["user" => $request->user()], Response::HTTP_OK);
+        } catch(\Exception $e) {
+            if(config('app.debug'))
+                return response()->json(["message" => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+
+            return response()->json(["message" => "Something went wrong!"], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }

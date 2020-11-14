@@ -62,10 +62,17 @@
 
 <script>
 import AppLayout from '@/Layouts/AppLayout'
+import Store from '../store';
 
 export default {
     components: {
         AppLayout,
+    },
+
+    computed: {
+        user() {
+            return Store.state.user;
+        },
     },
 
     data() {
@@ -102,7 +109,7 @@ export default {
         sendMessage: async function () {
             if(this.message != "" || this.message.length > 0) {
                 await this.messages.push({
-                    'from': 1,
+                    'from': this.user.id,
                     'to': this.userSelectedId,
                     'content': this.message,
                     'created_at': new Date().toISOString(),
@@ -117,8 +124,6 @@ export default {
                 axios.post("/api/messages/", {
                     "to": this.userSelectedId,
                     "content": message
-                }).then(() => {
-                    console.log("message sent!");
                 });
             }
         },
