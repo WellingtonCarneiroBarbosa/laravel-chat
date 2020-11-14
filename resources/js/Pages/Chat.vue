@@ -45,7 +45,7 @@
 
                     <!-- Submit message form -->
                     <div v-if="userSelected" class="w-full bg-gray-200 bg-opacity-25 p-6 border-t border-gray-200">
-                        <form v-on:submit.prevent="">
+                        <form v-on:submit.prevent="sendMessage">
                             <div class="flex rounded-md overflow-hidden border border-gray-300">
                                 <input v-model="message" class="flex-1 px-4 py-2 text-sm focus:outline-none" type="text">
                                 <button class="bg-indigo-500 rounded-sm hover:bg-indigo-600 text-white px-4 py-2" type="submit">Enviar</button>
@@ -88,8 +88,21 @@ export default {
             });
         },
 
-        sendMessage: function () {
+        sendMessage: async function () {
+            if(this.message != "" || this.message.length > 0) {
+                this.messages.push(this.message);
+                let message = this.message;
+                this.message = "";
 
+                let data = {
+                    "to": this.userSelected,
+                    "content": message
+                };
+
+                await axios.post("/api/messages/", data).then(response => {
+                    console.log("message sent!");
+                });
+            }
         },
     },
 

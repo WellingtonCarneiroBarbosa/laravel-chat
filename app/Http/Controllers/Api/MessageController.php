@@ -58,4 +58,27 @@ class MessageController extends Controller
             return response()->json(['message' => "Something went wrong!"], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    public function store(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'content' => 'required',
+                'to' => 'required',
+            ]);
+
+            $message = Message::create([
+                "from" => $request->user()->id,
+                "to" => $validatedData["to"]["id"],
+                "content" => $validatedData["content"]
+            ]);
+
+            return response()->json(['message' => $message], Response::HTTP_CREATED);
+        } catch(\Exception $e) {
+            if(config('app.debug'))
+                return response()->json(['message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+
+            return response()->json(['message' => "Something went wrong!"], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }

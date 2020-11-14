@@ -38,4 +38,6 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth:sanctum', 'verified']], 
     Route::get("/users/{user}", [UserController::class, 'show']);
     Route::get("/users/except-logged-in", [UserController::class, 'getAllUsersExceptLoggedIn']);
     Route::get("/messages/{user}", [MessageController::class, 'index']);
+
+    Route::post("/messages", [MessageController::class, 'store']);
 });
