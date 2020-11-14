@@ -75,15 +75,15 @@ php artisan websocket:serve
 **O realtime fica ainda mais legal se você abrir uma aba anônima logado com outro usuário e testar o chat hehe**
 
 ## Autor
-<a href="https://github.com/wellingtoncarneirobarbosa">
+<a href="https://github.com/wellingtoncarneirobarbosa" target="blank">
 <img src="./public/readme-assets/autor.jpg" width="48" height="48" alt="Wellington Carneiro Barbosa"> Wellington Barbosa
 </a>
 <br>
-<a href="https://instagram.com/owellcarneiro">
+<a href="https://instagram.com/owellcarneiro" target="blank">
 Instagram
 </a>
 |
-<a href="https://linkedin.com/in/wellingtoncarneirobarbosa">
+<a href="https://linkedin.com/in/wellingtoncarneirobarbosa" target="blank">
 LinkedIn
 </a>
 
