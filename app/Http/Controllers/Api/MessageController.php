@@ -69,7 +69,7 @@ class MessageController extends Controller
 
             $message = Message::create([
                 "from" => $request->user()->id,
-                "to" => $validatedData["to"]["id"],
+                "to" => $validatedData["to"],
                 "content" => $validatedData["content"]
             ]);
 

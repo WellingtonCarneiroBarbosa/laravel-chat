@@ -88,18 +88,18 @@ export default {
             });
         },
 
-        sendMessage: async function () {
+        sendMessage: function () {
             if(this.message != "" || this.message.length > 0) {
                 this.messages.push(this.message);
                 let message = this.message;
                 this.message = "";
 
                 let data = {
-                    "to": this.userSelected,
+                    "to": this.userSelected.id,
                     "content": message
                 };
 
-                await axios.post("/api/messages/", data).then(response => {
+                axios.post("/api/messages/", data).then(response => {
                     console.log("message sent!");
                 });
             }
