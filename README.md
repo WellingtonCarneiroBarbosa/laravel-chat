@@ -86,6 +86,11 @@ Instagram
 <a href="https://linkedin.com/in/wellingtoncarneirobarbosa" target="_blank">
 LinkedIn
 </a>
+|
+<a href="https://facebook.com/owellcarneiro" target="_blank">
+Facebook
+</a>
+
 
 ## Licença
 
