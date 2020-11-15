@@ -45,7 +45,8 @@ npm run dev
 
 5. Crie um arquivo .env na raiz do projeto com o conteúdo do arquivo [.env.example](./.env.example)
 
-6. Crie um banco de dados chamado "laravel-chat"
+6. Crie um banco de dados chamado "laravel-chat" (é importante que o charset encode seja utf8mb4_general_ci, ou sua aplicação
+não terá suporte a emojis. E todo mundo ama emojis)
 
 7. Gere a chave de sessão da aplicação
 ```
