@@ -1,4 +1,4 @@
-# Realtime WebChat
+# Realtime WebChat-
 ![Alt Text](./public/readme-assets/realtime-chat.gif)
 
 **Antes de tudo: se achou a aplicação legal, dê uma estrelinha no repositório ❤️**
