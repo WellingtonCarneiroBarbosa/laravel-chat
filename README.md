@@ -1,81 +1,74 @@
-# Realtime WebChat-
+# Realtime WebChat
 ![Alt Text](./public/readme-assets/realtime-chat.gif)
 
-**Antes de tudo: se achou a aplicação legal, dê uma estrelinha no repositório ❤️**
+*Before everthing: if you thought it wass cool, please, give me a start ❤️**
 
 ## Sobre o Projeto
 
-Esta foi uma aplicação rápida desenvolvida para entender melhor como o Laravel trabalha em conjunto com Vue.js e Inertia.js, além de entender como funciona o Laravel WebSockets. É interessante ressaltar que o **realtime** desenvolvido na aplicação **não depende** de nenhuma API externa paga, como [pusher](https://pusher.com) por exemplo. 
+Application developed to undestand better how Laravel works with Vue.Js and Inertia.Js + Laravel WebSockets. It is interesting to say the realtime developed on application does not depends from any API like [puser](https://pusher.com). It is 100% WebSockets.👌
 
-Através do Laravel WebSockets, é gerado um servidor local para realizar o websocket 👌
-
-### Tecnologias Utilizadas
+### Used Stacks
 
 - Laravel 8.x
 - Vue.js 
 - Inertia.js
 - Tailwind Css
 
-### Tempo de Desenvolvimento
-- Entre 7 a 9 horas
-
-## Rodando o Projeto em Sua Máquina Local
-**Requisitos: Pilha [LAMPP ou XAMPP](https://www.apachefriends.org/index.html) | [Composer](https://getcomposer.org/download/) | [NPM](https://nodejs.org/en/download/)**
+## Tunning it on localhost
+**Requirements: Stack [LAMPP ou XAMPP](https://www.apachefriends.org/index.html) | [Composer](https://getcomposer.org/download/) | [NPM](https://nodejs.org/en/download/)**
 
 ### Etapas
-1. Clone o repositório
+1. Clone the repository
 ```
 git clone https://github.com/wellingtoncarneirobarbosa/laravel-chat.git
 ```
 
-2. Instale as dependências PHP
+2. Install the PHP dependencies
 ```
 composer install
 ```
 
-3. Instale as dependências JS
+3. Install the JS dependencies
 ```
 npm install
 ```
 
-4. Faça o build dos pacotes js
+4. Build the js files
 ```
 npm run dev
 ```
 
-5. Crie um arquivo .env na raiz do projeto com o conteúdo do arquivo [.env.example](./.env.example)
+5. Create a new .env on root with content from [.env.example](./.env.example)
 
-6. Crie um banco de dados chamado "laravel-chat" - <i>É importante que o charset utilizado no banco seja o <b>utf8mb4_general_ci</b>, ou sua aplicação
-não terá suporte a emojis. E todo mundo ama emojis</i>
+6. Create a new local database called "laravel-chat" - <i>Its important the database's charset is <b>utf8mb4_general_ci</b> to support emotes</i>
 
-7. Gere a chave de sessão da aplicação
+7. Generate a new app key
 ```
 php artisan key:generate
 ```
 
-8. Faça as publicações das tabelas em seu banco de dados
+8. Publish the database tables
 ```
 php artisan migrate
 ```
 
-9. Levante um servidor web
+9. Run a new local serv
 ```
 php artisan serve
 ```
 
-10. Em outro terminal, levante um servidor websocket
+10. In another shell, run the websocket serv
 ```
 php artisan websocket:serve
 ```
 
-11. [Clique Aqui](http://localhost:8000/laravel-websockets) ou em seu navegador abra "http://localhost:8000/laravel-websockets" e clique em "Connect" 
+11. [Click Here](http://localhost:8000/laravel-websockets) or in your navigator open "http://localhost:8000/laravel-websockets" and click in "Connect" 
 
-12. [Clique Aqui](http://localhost:8000/register) ou em seu navegador abra "http://localhost:8000/register" e cadastre alguns usuários
+12. [Click Here](http://localhost:8000/register) or in your navigator open "http://localhost:8000/register" and create some new users
 
-13. [Clique Aqui](http://localhost:8000/dashboard/chat) ou em seu navegador abra "http://localhost:8000/dashboard/chat" e teste o realtime chat :) 
-**O realtime fica ainda mais legal se você abrir uma aba anônima logado com outro usuário e testar o chat hehe**
+13. [Click Heri](http://localhost:8000/dashboard/chat) or in your navigator open "http://localhost:8000/dashboard/chat" and test my realtime chat :)
 
-## Autor
+## Author
 <a href="https://github.com/wellingtoncarneirobarbosa" target="_blank">
 <img src="./public/readme-assets/autor.jpg" width="80" height="80" alt="Wellington Carneiro Barbosa"> Wellington Barbosa
 </a>
@@ -95,4 +88,4 @@ Facebook
 
 ## Licença
 
-Este é um projeto de estudo e está sob a [Licença MIT](https://opensource.org/licenses/MIT).
+That is a study project and is under [MIT License](https://opensource.org/licenses/MIT).
