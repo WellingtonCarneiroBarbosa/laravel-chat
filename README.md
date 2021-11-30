@@ -1,7 +1,7 @@
 # Realtime WebChat
 ![Alt Text](./public/readme-assets/realtime-chat.gif)
 
-*Before everthing: if you thought it wass cool, please, give me a start ❤️**
+*Before everthing: if you thought it was cool, please, give me a star ❤️**
 
 ## Sobre o Projeto
 
